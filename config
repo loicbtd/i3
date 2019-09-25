@@ -17,9 +17,8 @@ bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym Print exec --no-startup-id i3-scrot
 bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 
-### LETTER SHORTCUTS ###################
+### TOOLS SHORTCUTS ###################
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
-bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 ### FOCUS SHORTCUTS ####################
 
@@ -47,7 +46,7 @@ bindsym $mod+Shift+m bar mode toggle
 ### APPLICATIONS SHORTCUTS #############
 
 # DMENU
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id dmenu_recency
 
 # INTERNET BROWSER
 bindsym $mod+F2 exec google-chrome-stable
@@ -91,10 +90,10 @@ bindsym $mod+f fullscreen toggle
 
 # CONTAINER LAYOUT
 bindsym $mod+s layout stacking
-bindsym $mod+z layout tabbed
+bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# TOGGLE 
+# TOGGLE FLOATING
 bindsym $mod+Shift+space floating toggle
 
 # CHANGE FOCUS BETWEEN TILING / FLOATING
@@ -118,31 +117,41 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-### WORKSPACE ##########################
+### WORKSPACES ##########################
 
 # SWITCH TO WORKSPACE
-bindsym $mod+ampersand workspace number $ws1
-bindsym $mod+eacute workspace number $ws2
-bindsym $mod+quotedbl workspace number $ws3
-bindsym $mod+apostrophe workspace number $ws4
-bindsym $mod+parenleft workspace number $ws5
-bindsym $mod+minus workspace number $ws6
-bindsym $mod+egrave workspace number $ws7
-bindsym $mod+underscore workspace number $ws8
-bindsym $mod+ccedilla workspace number $ws9
-bindsym $mod+agrave workspace number $ws10
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
 
 # MOVE FOCUSED CONTAINER TO WORKSPACE
-bindsym $mod+Shift+ampersand move container to workspace number $ws1
-bindsym $mod+Shift+eacute move container to workspace number $ws2
-bindsym $mod+Shift+quotedbl move container to workspace number $ws3
-bindsym $mod+Shift+apostrophe move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+minus move container to workspace number $ws6
-bindsym $mod+Shift+egrave move container to workspace number $ws7
-bindsym $mod+Shift+underscore move container to workspace number $ws8
-bindsym $mod+Shift+ccedilla move container to workspace number $ws9
-bindsym $mod+Shift+agrave move container to workspace number $ws10
+bindsym $mod+Ctrl+1 move container to workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8
+
+# MOVE TO FOCUSED CONTAINER TO WORKSPACE WITH FOCUSED CONTAINER
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+
+# NAVIGATE BETWEEN WORKSPACES
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
 
 ### MONITOR ############################
 
@@ -160,6 +169,10 @@ bindsym $mod+m move workspace to output right
 ########################################
 #STYLE - BEGIN
 ########################################
+
+# DEFAULT DESKTOP LAYOUT
+# workspace_layout toggle
+# default_orientation vertical
 
 # FONT
 font xft:URWGothic-Book 11
