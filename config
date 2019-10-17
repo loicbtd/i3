@@ -6,11 +6,15 @@
 set $mod Mod4
 
 ### START TERMINAL #####################
+# START TERMINAL
 bindsym $mod+Return exec terminal
 
+# START TERMINAL HERE
+bindsym $mod+t exec ~/.config/i3/open-terminal-here.sh
+
 ### BRIGHTNESS CONTROL #################
-bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 10;
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 10;
 
 ### SCREENSHOT SHORTCUTS ###############
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
@@ -156,7 +160,9 @@ bindsym $mod+Ctrl+Left workspace prev
 ### MONITOR ############################
 
 # DETECT MONITOR
-bindsym 235 exec xrandr --auto
+#bindsym XF86Display exec xrandr --output DP1 --pos 1366x0 --mode 1280x1024 --rate 60
+bindsym XF86Display exec xrandr --auto --output DP1 --mode 1280x1024 --right-of eDP1
+bindsym Shift+XF86Display exec xrandr --auto
 
 # MOVE ACTIVE WORKSPACE TO OUTPUT RIGHT
 bindsym $mod+m move workspace to output right
