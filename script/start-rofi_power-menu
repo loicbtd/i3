@@ -1,0 +1,24 @@
+#!/bin/sh
+
+MENU="$(rofi \
+  -color-window '#1F1F1F,#1F1F1F,#1F1F1F' \
+  -color-normal '#1F1F1F,#FFFFFF,#1F1F1F,#1e88e5' \
+  -sep "|" \
+  -dmenu -i -p 'Power' \
+  -location 5 \
+  -yoffset -45 \
+  -xoffset 0 \
+  -width 15 \
+  -hide-scrollbar \
+  -line-padding 4 \
+  -padding 20 \
+  -lines 4 \
+  -font "Roboto 10; Material Icons 10" \
+  <<< ' Lock| Logout| Reboot| Shutdown')"
+
+case "$MENU" in
+  *Lock) i3exit lock ;;
+  *Logout) i3exit logout;;
+  *Reboot) i3exit reboot ;;
+  *Shutdown) shutdown now -i poweroff
+esac

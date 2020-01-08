@@ -12,6 +12,7 @@
 #                ACTION                #
 #                                      #
 ########################################
+
 # mod key definition
 set $mod Mod4
 
@@ -21,33 +22,39 @@ bindsym $mod+Shift+r restart
 ########################################
 #              terminal                #
 ########################################
+
 # show terminal
 bindsym $mod+Return exec terminal
+
 
 ########################################
 #           screen brightness          #
 ########################################
-# xbacklight - increases screen brightness of 10%
-bindsym XF86MonBrightnessUp exec "xbacklight -inc 10;
 
-# xbacklight - decreases screen brightness of 10%
-bindsym XF86MonBrightnessDown exec "xbacklight -dec 10;
+# xbacklight - increases screen brightness of 5%
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+
+# xbacklight - decreases screen brightness of 5%
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+
 
 ########################################
 #              screenshot              #
 ########################################
+
 # i3-scrot - screenshot of selected area
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 
 # i3-scrot - full screen screenshot
 bindsym Print exec --no-startup-id i3-scrot
 
+
 ########################################
 #            user interfaces           #
 ########################################
+
 # bmenu (system administration settings cli)
 bindsym $mod+b exec terminal -e 'bmenu'
-
 
 
 ########################################
@@ -59,6 +66,7 @@ bindsym $mod+b exec terminal -e 'bmenu'
 ########################################
 #     current window focus change      #
 ########################################
+
 # set focus to the top window
 bindsym $mod+Up focus up
 
@@ -71,9 +79,11 @@ bindsym $mod+Down focus down
 # set focus to the left window
 bindsym $mod+Left focus left
 
+
 ########################################
 #         move focused window          #
 ########################################
+
 # move the focused window to the top
 bindsym $mod+Shift+Up move up
 
@@ -86,9 +96,11 @@ bindsym $mod+Shift+Down move down
 # move the focused window to the left
 bindsym $mod+Shift+Left move left
 
+
 ########################################
 #           action on window           #
 ########################################
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -117,6 +129,7 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+
 ########################################
 #                                      #
 #           POWER MANAGEMENT           #
@@ -126,17 +139,9 @@ bindsym $mod+r mode "resize"
 ########################################
 #             acpi management          #
 ########################################
-# lock, logout, reboot, shutdown
-set $mode_system (l)ock, (e)xit, (r)eboot, (Shift+s)hutdown
-mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec shutdown now, mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+p mode "$mode_system"
+
+bindsym $mod+p exec $HOME/.i3/script/start-rofi_power-menu
+
 
 ########################################
 #                                      #
@@ -147,6 +152,7 @@ bindsym $mod+p mode "$mode_system"
 ########################################
 #            F function keys           #
 ########################################
+
 # F1 - markdown editor
 bindsym $mod+F1 exec typora
 
@@ -162,11 +168,17 @@ bindsym $mod+F3 exec pcmanfm
 # F3+Shift - file browser as root
 bindsym $mod+Shift+F3 exec gksu pcmanfm
 
+
 ########################################
 #                others                #
 ########################################
+
 # rofi - application launcher
-bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+d exec $HOME/.i3/script/start-rofi_full
+
+# rofi - settings launcher
+bindsym $mod+Shift+d exec $HOME/.i3/script/start-rofi_settings-menu
+
 
 ########################################
 #                                      #
@@ -177,6 +189,7 @@ bindsym $mod+d exec --no-startup-id rofi -show run
 ########################################
 #            workspace names           #
 ########################################
+
 set $ws1 1
 set $ws2 2
 set $ws3 3
@@ -188,9 +201,11 @@ set $ws8 8
 set $ws9 9
 set $ws10 10
 
+
 ########################################
 #        switch to a workspace         #
 ########################################
+
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -202,9 +217,11 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 
+
 ########################################
 #  move focused window to a workspace  #
 ########################################
+
 bindsym $mod+Ctrl+1 move container to workspace $ws1
 bindsym $mod+Ctrl+2 move container to workspace $ws2
 bindsym $mod+Ctrl+3 move container to workspace $ws3
@@ -216,9 +233,11 @@ bindsym $mod+Ctrl+8 move container to workspace $ws8
 bindsym $mod+Ctrl+9 move container to workspace $ws9
 bindsym $mod+Ctrl+0 move container to workspace $ws10
 
+
 #################################################################
 #  move focused window to a workspace and keep the focus on it  #
 #################################################################
+
 bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
@@ -230,17 +249,22 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
+
 ########################################
 #      navigate between workspaces     #
 ########################################
+
 # focuses the next workspace
 bindsym $mod+Ctrl+Right workspace next
+
 # focuses the previous workspace
 bindsym $mod+Ctrl+Left workspace prev
+
 
 ###############################################
 #  move active workspace to the other monitor #
 ###############################################
+
 bindsym $mod+m move workspace to output right
 
 
@@ -249,6 +273,7 @@ bindsym $mod+m move workspace to output right
 #     MONITOR MANAGEMENT  - TODO       #
 #                                      #
 ########################################
+
 bindsym XF86Display exec xrandr --auto --output DP1 --mode 1280x1024 --right-of eDP1
 bindsym Shift+XF86Display exec xrandr --auto
 
@@ -262,13 +287,20 @@ bindsym Shift+XF86Display exec xrandr --auto
 ########################################
 #                 font                 #
 ########################################
+
 font xft:URWGothic-Book 11
+
 
 ########################################
 #              border style            #
 ########################################
+
 new_window pixel 1
 new_float pixel 1
+
+########################################
+#            terminal color            #
+########################################
 
 set_from_resource $term_background background
 set_from_resource $term_foreground foreground
@@ -290,7 +322,10 @@ set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
 
 
-# Theme colors
+########################################
+#              theme color             #
+########################################
+
 # class                   border  backgr. text    indic.   child_border
 client.focused          #556064 #556064 #80FFF9 #FDF6E3
 client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
@@ -303,8 +338,12 @@ client.background       #2B2C2B
 
 ########################################
 #                                      #
-#          STARTUP APPLICATION         #
+#         APPLICATIONS AUTOSTART       #
 #                                      #
+########################################
+
+########################################
+#           once at startup            #
 ########################################
 
 # polkit-gnome-authentication-agent
@@ -313,9 +352,6 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # nitrogen (wallpaper, deskotp look...)
 exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 
-# ff-theme-util
-exec_always --no-startup-id ff-theme-util
-
 # network manager
 exec --no-startup-id nm-applet
 
@@ -323,7 +359,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 
 # system monitor
-exec --no-startup-id $HOME/.i3/conky/start_conky.sh
+exec --no-startup-id $HOME/.i3/conky/start-conky.sh
 
 # power manager
 exec --no-startup-id xfce4-power-manager
@@ -331,69 +367,82 @@ exec --no-startup-id xfce4-power-manager
 # clipboard manager
 exec --no-startup-id clipit
 
-# xcursor
-exec_always --no-startup-id fix_xcursor
-
 # insync
 exec --no-startup-id insync
 
+
+########################################
+#                always                #
+########################################
+
+# ff-theme-util
+exec_always --no-startup-id ff-theme-util
+
+# xcursor
+exec_always --no-startup-id fix_xcursor
+
 # polybar
-exec_always --no-startup-id ~/.i3/polybar.sh &
-
-
-
-# Use pactl to adjust volume in PulseAudio.
-#set $refresh_i3status killall -SIGUSR1 i3status
-#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-#bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+exec_always --no-startup-id $HOME/.i3/polybar/start-polybar.sh &
 
 
 ########################################
-#STATUS BAR - BEGIN
+#                                      #
+#             SOUND SECTION            #
+#                                      #
 ########################################
 
-bar {
-	i3bar_command i3bar
-	status_command i3status
-	position bottom
+########################################
+#             sound settings TODO          #
+########################################
 
-        #tray_output primary
-        #tray_output eDP1
-
-	bindsym button4 nop
-	bindsym button5 nop
-        font xft:URWGothic-Book 11
-	strip_workspace_numbers yes
-
-    colors {
-        background #222D31
-        statusline #F9FAF9
-        separator  #454947
-
-#                          border  backgr. text
-        focused_workspace  #F9FAF9 #16a085 #292F34
-        active_workspace   #595B5B #353836 #FDF6E3
-        inactive_workspace #595B5B #222D31 #EEE8D5
-        binding_mode       #16a085 #2C2C2C #F9FAF9
-        urgent_workspace   #16a085 #FDF6E3 #E5201D
-    }
-}
-
-#_______________________________________
-#STATUS BAR - END
-#_______________________________________
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
 
 
-################################################################################################
-## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
-################################################################################################
+########################################
+#                                      #
+#               RESOURCES              #
+#                                      #
+########################################
 
-exec --no-startup-id volumeicon
-bindsym $mod+CShift+m exec terminal -e 'alsamixer'
-#exec --no-startup-id pulseaudio
-#exec --no-startup-id pa-applet
-#bindsym $mod+CShift+m exec pavucontrol
+#bar {
+#  i3bar_command i3bar
+#	status_command i3status
+#	position bottom
+#
+#  #tray_output primary
+#  #tray_output eDP1
+#
+#	bindsym button4 nop
+#	bindsym button5 nop
+#   font xft:URWGothic-Book 11
+#	strip_workspace_numbers yes
+#
+#  colors {
+#    background #222D31
+#    statusline #F9FAF9
+#    separator  #454947
+#
+##                      border  backgr. text
+#    focused_workspace  #F9FAF9 #16a085 #292F34
+#    active_workspace   #595B5B #353836 #FDF6E3
+#    inactive_workspace #595B5B #222D31 #EEE8D5
+#    binding_mode       #16a085 #2C2C2C #F9FAF9
+#    urgent_workspace   #16a085 #FDF6E3 #E5201D
+#  }
+#}
 
-################################################################################################
+
+
+## lock, logout, reboot, shutdown
+#set $mode_system (l)ock, (e)xit, (r)eboot, (Shift+s)hutdown
+#mode "$mode_system" {
+#    bindsym l exec --no-startup-id i3exit lock, mode "default"
+#    bindsym e exec --no-startup-id i3exit logout, mode "default"
+#    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+#    bindsym Shift+s exec shutdown now, mode "default"
+#    bindsym Return mode "default"
+#    bindsym Escape mode "default"
+#}
+#bindsym $mod+p mode "$mode_system"
