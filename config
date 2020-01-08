@@ -382,7 +382,7 @@ exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
 # polybar
-exec_always --no-startup-id $HOME/.i3/polybar/start-polybar.sh &
+exec_always --no-startup-id $HOME/.i3/polybar/start-polybar &
 
 
 ########################################
@@ -405,7 +405,6 @@ bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
 #               RESOURCES              #
 #                                      #
 ########################################
-
 #bar {
 #  i3bar_command i3bar
 #	status_command i3status
@@ -432,7 +431,6 @@ bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
 #    urgent_workspace   #16a085 #FDF6E3 #E5201D
 #  }
 #}
-
 
 
 ## lock, logout, reboot, shutdown

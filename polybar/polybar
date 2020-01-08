@@ -96,7 +96,7 @@ module-margin-left = 1
 module-margin-right = 1
 
 modules-left = arch settings workspaces
-modules-right = alsa battery date powermenu
+modules-right = alsa wireless-network date battery powermenu
 
 
 ;cursor-click = pointer
@@ -134,43 +134,67 @@ click-left = "$HOME/.i3/script/start-rofi_full &"
 
 [module/workspaces]
 
-type = internal/xworkspaces
-pin-workspaces = false
+type = internal/i3
+
+pin-workspaces = true
+
+strip-wsnumbers = true
+
+index-sort = true
+
 enable-click = true
+
 enable-scroll = false
-format-padding = 0
+wrapping-scroll = false
+reverse-scroll = false
 
-icon-0 = 1;
-icon-1 = 2;
-icon-2 = 3;
-icon-3 = 4;
-icon-4 = 5;
-icon-5 = 6;
-icon-6 = 7;
-icon-7 = 8;
-icon-8 = 9;
-icon-9 = 10;
-icon-default = icon
+fuzzy-match = true
 
-format = <label-state>
-label-active = %icon%
-label-occupied = %icon%
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 0;
+ws-icon-default = ♟
+
+format = <label-state> <label-mode>
+
+label-mode = %mode%
+label-mode-padding = 1
+label-mode-background = #e60053
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+label-focused = %icon%
+label-focused-foreground = #ffffff
+label-focused-background = ${color.bg}
+label-focused-underline = ${color.blue}
+label-focused-padding = 2
+
+label-unfocused = %icon%
+label-unfocused-padding = 2
+
+label-visible = %icon%
+label-visible-underline = #555555
+label-visible-padding = 2
+
 label-urgent = %icon%
-label-empty = %icon%
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-padding = 2
 
-label-occupied-padding = 1
-label-empty-padding = 1
-label-urgent-padding = 1
-label-active-padding = 1
-
-label-active-foreground = ${color.acolor}
-label-urgent-foreground = ${color.curgent}
-label-empty-foreground = ${color.fg}
-label-occupied-foreground = ${color.coccupied}
-
-label-active-underline = ${color.acolor}
-label-urgent-underline = ${color.curgent}
-label-occupied-underline = ${color.coccupied}
+label-separator =
+label-separator-padding = 2
+label-separator-foreground = #ffb52a
 
 
 ; ==========================================================
@@ -193,37 +217,27 @@ click-left = "$HOME/.i3/script/start-rofi_settings-menu &"
 [module/battery]
 
 type = internal/battery
+
 full-at = 99
+
+; Use the following command to list batteries and adapters:
+; $ ls -1 /sys/class/power_supply/
+battery = BAT0
+adapter = ADP0
+
+poll-interval = 5
+
 time-format = %H:%M
-battery = BAT1
-adapter = AC
-format-charging = <animation-charging> <label-charging>
-;label-charging = %percentage%% (%time%)
-label-charging = %percentage%%
-format-discharging = <ramp-capacity> <label-discharging>
-;label-discharging = %percentage%% (%time%)
-label-discharging = %percentage%%
-format-full = <label-full>
 
-format-full-prefix = " "
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
+format-charging = <label-charging>
 
-ramp-capacity-0-foreground = ${color.red}
-ramp-capacity-foreground   = ${color.fg}
-bar-capacity-width = 10
+format-discharging = <label-discharging>
 
-animation-charging-0 = ""
-animation-charging-1 = ""
-animation-charging-2 = ""
-animation-charging-3 = ""
-animation-charging-4 = ""
+label-charging =  %percentage%%
 
-animation-charging-framerate = 750
+label-discharging =  %percentage%%
 
+label-full = 100%
 
 ; ==========================================================
 ;|                           volume                         |
@@ -253,20 +267,56 @@ ramp-volume-0 = 
 ramp-volume-1 = 
 ramp-volume-2 = 
 
-click-right = pavucontrol &
-
 
 ; ==========================================================
-;|                           network                        |
+;|                       wireless network                   |
 ; ==========================================================
 
-[module/network]
+[module/wireless-network]
+type = internal/network
 
-type = custom/script
-exec = check-network
-click-left = networkmanager_dmenu &
-click-right = networkmanager_dmenu &
-tail = true
+interface = wlp3s0
+
+interval = 1
+
+accumulate-stats = true
+
+format-connected = <ramp-signal> <label-connected>
+
+format-disconnected = <label-disconnected>
+
+format-packetloss = <animation-packetloss> <label-connected>
+
+; All labels support the following tokens:
+;   %ifname%    [wireless+wired]
+;   %local_ip%  [wireless+wired]
+;   %local_ip6% [wireless+wired]
+;   %essid%     [wireless]
+;   %signal%    [wireless]
+;   %upspeed%   [wireless+wired]
+;   %downspeed% [wireless+wired]
+;   %linkspeed% [wired]
+
+label-connected = |  %local_ip%   %downspeed%  %upspeed% |
+label-connected-foreground = #eefafafa
+
+; Default: (none)
+label-disconnected = 
+label-disconnected-foreground = #66ffffff
+
+; Default: (none)
+label-packetloss = %essid%
+label-packetloss-foreground = #eefafafa
+
+; Only applies if <ramp-signal> is used
+ramp-signal-0 = 😱
+ramp-signal-1 = 😠
+ramp-signal-2 = 😒
+ramp-signal-3 = 😊
+ramp-signal-4 = 😃
+ramp-signal-5 = 😈
+
+click-left = "nmtui"
 
 
 ; ==========================================================
@@ -278,7 +328,8 @@ tail = true
 type = internal/date
 interval = 1
 label =  %time%
-time =  %H:%M:%S |  %Y-%m-%d
+time =  %H:%M:%S |  %Y-%m-%d |
+
 
 ; ==========================================================
 ;|                            powermenu                     |
