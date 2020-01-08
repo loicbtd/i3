@@ -20,5 +20,5 @@ case "$MENU" in
   *Lock) i3exit lock ;;
   *Logout) i3exit logout;;
   *Reboot) i3exit reboot ;;
-  *Shutdown) shutdown now -i poweroff
+  *Shutdown) shutdown now ;;
 esac
