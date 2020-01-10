@@ -8,7 +8,7 @@ rofi \
 -location 7 \
 -theme-str "prompt { enabled:false; }" \
 -yoffset -45 \
--xoffset 0 \
+-xoffset 5 \
 -line-padding 2 \
 -columns 1 \
 -width 25 \

@@ -2,6 +2,7 @@ packages:
 polybar
 rofi
 conky
+caja
 
 fonts:
 Roboto

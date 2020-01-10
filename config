@@ -42,11 +42,8 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 #              screenshot              #
 ########################################
 
-# i3-scrot - screenshot of selected area
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
-
-# i3-scrot - full screen screenshot
-bindsym Print exec --no-startup-id i3-scrot
+# flameshot - region screenshot
+bindsym Print exec --no-startup-id flameshot gui
 
 
 ########################################
@@ -141,6 +138,7 @@ bindsym $mod+r mode "resize"
 ########################################
 
 bindsym $mod+p exec $HOME/.i3/script/start-rofi_power-menu
+bindsym XF86PowerOff exec $HOME/.i3/script/start-rofi_power-menu
 
 
 ########################################
@@ -163,10 +161,10 @@ bindsym $mod+Shift+F1 exec vscodium
 bindsym $mod+F2 exec google-chrome-stable
 
 # F3 - file browser
-bindsym $mod+F3 exec pcmanfm
+bindsym $mod+F3 exec caja
 
 # F3+Shift - file browser as root
-bindsym $mod+Shift+F3 exec gksu pcmanfm
+bindsym $mod+Shift+F3 exec gksu caja
 
 
 ########################################
@@ -349,7 +347,7 @@ client.background       #2B2C2B
 # polkit-gnome-authentication-agent
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-# nitrogen (wallpaper, deskotp look...)
+# nitrogen - wallpaper
 exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 
 # network manager
@@ -369,6 +367,9 @@ exec --no-startup-id clipit
 
 # insync
 exec --no-startup-id insync
+
+#jetbrain toolbox
+exec --no-startup-id jetbrains-toolbox --minimize
 
 
 ########################################
@@ -391,56 +392,11 @@ exec_always --no-startup-id $HOME/.i3/polybar/start-polybar &
 #                                      #
 ########################################
 
-########################################
-#             sound settings TODO          #
-########################################
+#increase sound volume
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% 
 
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
+#decrease sound volume
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% 
 
-
-########################################
-#                                      #
-#               RESOURCES              #
-#                                      #
-########################################
-#bar {
-#  i3bar_command i3bar
-#	status_command i3status
-#	position bottom
-#
-#  #tray_output primary
-#  #tray_output eDP1
-#
-#	bindsym button4 nop
-#	bindsym button5 nop
-#   font xft:URWGothic-Book 11
-#	strip_workspace_numbers yes
-#
-#  colors {
-#    background #222D31
-#    statusline #F9FAF9
-#    separator  #454947
-#
-##                      border  backgr. text
-#    focused_workspace  #F9FAF9 #16a085 #292F34
-#    active_workspace   #595B5B #353836 #FDF6E3
-#    inactive_workspace #595B5B #222D31 #EEE8D5
-#    binding_mode       #16a085 #2C2C2C #F9FAF9
-#    urgent_workspace   #16a085 #FDF6E3 #E5201D
-#  }
-#}
-
-
-## lock, logout, reboot, shutdown
-#set $mode_system (l)ock, (e)xit, (r)eboot, (Shift+s)hutdown
-#mode "$mode_system" {
-#    bindsym l exec --no-startup-id i3exit lock, mode "default"
-#    bindsym e exec --no-startup-id i3exit logout, mode "default"
-#    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-#    bindsym Shift+s exec shutdown now, mode "default"
-#    bindsym Return mode "default"
-#    bindsym Escape mode "default"
-#}
-#bindsym $mod+p mode "$mode_system"
+# mute sound
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle

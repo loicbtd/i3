@@ -95,17 +95,26 @@ border-color = ${color.bg}
 module-margin-left = 1
 module-margin-right = 1
 
-modules-left = arch settings workspaces
-modules-right = alsa wireless-network date battery powermenu
+modules-left = arch workspaces
+modules-right = alsa wireless-network date battery
 
+tray-position = right
 
-;cursor-click = pointer
-;cursor-scroll = ns-resize
-;tray-position = right
-;tray-padding = 0
-;tray-maxsize = 16
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
+tray-detached = false
+
+tray-maxsize = 16
+
+tray-transparent = false
+tray-background = ${root.background}
+
+tray-offset-x = 0
+tray-offset-y = 0
+
+; Pad the sides of each tray icon
+tray-padding = 0
+
+; Scale factor for tray clients
+tray-scale = 1.0
 
 
 ; ==========================================================
@@ -126,6 +135,8 @@ content-padding = 3
 content-background = ${color.acolor}
 content-foreground = ${color.black}
 click-left = "$HOME/.i3/script/start-rofi_full &"
+click-right = "$HOME/.i3/script/start-rofi_power-menu &"
+
 
 
 ; ==========================================================
@@ -188,26 +199,13 @@ label-visible-underline = #555555
 label-visible-padding = 2
 
 label-urgent = %icon%
-label-urgent-foreground = #000000
-label-urgent-background = #bd2c40
+label-urgent-foreground = #ffffff
+label-urgent-background = ${color.blue}
 label-urgent-padding = 2
 
 label-separator =
 label-separator-padding = 2
 label-separator-foreground = #ffb52a
-
-
-; ==========================================================
-;|                          settings                        |
-; ==========================================================
-
-[module/settings]
-
-type = custom/text
-content = 
-content-padding = 1
-content-foreground = ${color.fg}
-click-left = "$HOME/.i3/script/start-rofi_settings-menu &"
 
 
 ; ==========================================================
@@ -233,11 +231,11 @@ format-charging = <label-charging>
 
 format-discharging = <label-discharging>
 
-label-charging =  %percentage%%
+label-charging =  %percentage%% |
 
-label-discharging =  %percentage%%
+label-discharging =  %percentage%% |
 
-label-full = 100%
+label-full = 100% |
 
 ; ==========================================================
 ;|                           volume                         |
@@ -316,8 +314,6 @@ ramp-signal-3 = 😊
 ramp-signal-4 = 😃
 ramp-signal-5 = 😈
 
-click-left = "nmtui"
-
 
 ; ==========================================================
 ;|                            date                          |
@@ -329,17 +325,3 @@ type = internal/date
 interval = 1
 label =  %time%
 time =  %H:%M:%S |  %Y-%m-%d |
-
-
-; ==========================================================
-;|                            powermenu                     |
-; ==========================================================
-
-[module/powermenu]
-
-type = custom/text
-content = 
-content-padding = 2
-content-background = ${color.acolor}
-content-foreground = ${color.black}
-click-left = "$HOME/.i3/script/start-rofi_power-menu &"

@@ -5,9 +5,9 @@ MENU="$(rofi \
   -color-normal '#1F1F1F,#FFFFFF,#1F1F1F,#1e88e5' \
   -sep "|" \
   -dmenu -i -p 'Power' \
-  -location 5 \
+  -location 7 \
   -yoffset -45 \
-  -xoffset 0 \
+  -xoffset 5 \
   -width 15 \
   -hide-scrollbar \
   -line-padding 4 \
